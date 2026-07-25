@@ -13,3 +13,7 @@ to make sure computer does not wakeup from sleep when controller turns off
 edit add script called steamos to ```/usr/lib/elogind/system-sleep``` 
 
 script will use bscpylgtvcommand to power off the tv when computer goes to sleep, and if tty2 is active when computer wakes from sleep it will power on tv over wakeonlan
+
+### Powering off so tv shutsdown when computer powers off
+add script called 30-tv-off to
+`/usr/lib/elogind/system-shutdown` also add close_brave if you want to close brave so it doesn't give errors when you power on pc again
