@@ -6,7 +6,7 @@ Setup gamescope session on Linux / Artix Linux Use Dinit for artix for best resu
 `.zlogin` for it launch the session when tty is 2
 
 ### Wakeup lg tv
-wakeonland works but shutting down is harder
+wakeonlan works but shutting down is harder
 you bscpylgtvcommand
 `/var/lib/lgtv` folder to be writable you need to file called `.aiopylgtv.sqlite` in there to be able run bscpylgtv commands
 
