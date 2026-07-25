@@ -1,5 +1,9 @@
 # gamescopesession
-Setup gamescope session on Linux / Artix Linux
+Setup gamescope session on Linux / Artix Linux Use Dinit for artix for best results
+
+### Setting up right launch parameters to steambig picture work in another tty
+`.local/bin/` folder has needed scripts to gamescopes session work also you need to use included
+`.zlogin` for it launch the session when tty is 2
 
 ### Wakeup lg tv
 
