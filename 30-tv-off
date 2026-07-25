@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Only run on shutdown or halt
+if [ "$1" = "halt" ] || [ "$1" = "poweroff" ]; then
+
+  # Check if Gamescope is running
+  # Ensure writable folder for bscpylgtv
+  cd /var/lib/lgtv
+
+  # Send power off command to TV
+  /usr/bin/bscpylgtvcommand 192.168.0.125 power_off
+
+fi

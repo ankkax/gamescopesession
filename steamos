@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case "$1" in
+pre)
+  /usr/bin/bscpylgtvcommand 192.168.0.125 power_off
+  while lsusb | grep -q "045e:028e"; do
+    sleep 2
+  done
+  ;;
+
+post)
+
+  if [ "$(cat /sys/class/tty/tty0/active)" = "tty2" ]; then
+    sleep 4
+    /usr/bin/wakeonlan -i 192.168.0.125 58:96:0A:4B:1F:E2
+  fi
+  ;;
+esac
+
+exit 0

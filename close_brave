@@ -1,0 +1,21 @@
+#!/bin/bash
+# /etc/elogind/system-shutdown/browser-graceful
+
+if [[ "$1" != "poweroff" && "$1" != "reboot" ]]; then
+  exit 0
+fi
+
+ACTIVE_USER=$(loginctl list-users --no-legend | awk '{print $2}')
+if [ -z "$ACTIVE_USER" ] || [ "$ACTIVE_USER" = "root" ]; then
+  echo "No active non-root user found" >&2
+  exit 0
+fi
+
+# Ask browsers to exit gracefully
+pkill -TERM -u $ACTIVE_USER -x brave 2>/dev/null || true
+runuser -u $ACTIVE_USER -- wmctrl -c "Mozilla Firefox"
+
+# Wait until both browsers have exited
+sleep 1
+
+exit 0
