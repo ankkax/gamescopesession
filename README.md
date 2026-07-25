@@ -11,3 +11,5 @@ ACTION=="add|change", SUBSYSTEM=="usb", KERNEL=="usb3", ENV{DEVTYPE}=="usb_devic
 ```
 to make sure computer does not wakeup from sleep when controller turns off
 edit add script called steamos to ```/usr/lib/elogind/system-sleep``` 
+
+script will use bscpylgtvcommand to power off the tv when computer goes to sleep, and if tty2 is active when computer wakes from sleep it will power on tv over wakeonlan
