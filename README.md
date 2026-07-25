@@ -6,10 +6,20 @@ Setup gamescope session on Linux / Artix Linux Use Dinit for artix for best resu
 `.zlogin` for it launch the session when tty is 2
 
 ### Wakeup lg tv
+wakeonland works but shutting down is harder
+you bscpylgtvcommand
+`/var/lib/lgtv` folder to be writable you need to file called `.aiopylgtv.sqlite` in there to be able run bscpylgtv commands
+
+-- Use elogind systemshutdown to invoke shutdown tv when shutting down pc using bscpylgtvcommand,
+you need to make folder `/var/lib/lgtv/` and `chmod +x 777 lgtv` folder,
+and copy `faiopylgtv.sqlite` from home folder there after you have once ran bscpylgtvcommand
+on your home to get permissions
+add 10-tv-off to so TV turn off after powering off the computer
+```/usr/lib/elogind/system-shutdown/10-tv-off```
 
 ### Wakeup from sleep with controller
 lsusb to check the device 
-sudo vim /etc/udev/rules.d/10-wakeup.rules
+`sudo vim /etc/udev/rules.d/10-wakeup.rules`
 ```
 ACTION=="add|change", SUBSYSTEM=="usb", KERNEL=="usb3", ENV{DEVTYPE}=="usb_device", ATTR{power/wakeup}="enabled"
 ```
