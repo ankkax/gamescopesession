@@ -31,3 +31,6 @@ script will use bscpylgtvcommand to power off the tv when computer goes to sleep
 ### Powering off so tv shutsdown when computer powers off
 add script called 30-tv-off to
 `/usr/lib/elogind/system-shutdown` also add close_brave if you want to close brave so it doesn't give errors when you power on pc again
+
+### Antimicrox to change tty when you press home button on your controller
+add `xhometotty2` script to `.config/antimicrox/scripts` and use antimicrox software to bind the script on the right button
