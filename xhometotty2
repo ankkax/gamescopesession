@@ -1,0 +1,15 @@
+#!/bin/sh
+
+SINK=$(pamixer --list-sinks | grep Navi | awk '{gsub(/"/, "", $2); print $2}')
+ACTIVE_TTY=$(cat /sys/class/tty/tty0/active)
+
+if [ "$ACTIVE_TTY" = "tty7" ]; then
+  if pgrep -x "steam" >/dev/null; then
+    steam -shutdown
+    while pgrep -x steam >/dev/null; do sleep 1; done
+  fi
+  wakeonlan -i 192.168.0.125 58:96:0A:4B:1F:E2
+  #  pactl set-default-sink "$SINK"
+  sleep 1
+  sudo chvt 2
+fi
