@@ -1,0 +1,29 @@
+#!/bin/sh
+
+LOG="$HOME/.local/state/gamescope-session.log"
+MAX=1048576 # 1 MB
+
+mkdir -p "$(dirname "$LOG")"
+
+while true; do
+  # cap log size
+  if [ -f "$LOG" ] && [ "$(stat -c%s "$LOG")" -gt "$MAX" ]; then
+    : >"$LOG"
+  fi
+
+  echo "Waiting for tty2 to become active..." >>"$LOG"
+
+  while [ "$(cat /sys/class/tty/tty0/active)" != "tty1" ]; do
+    sleep 5
+  done
+
+  echo "tty2 is now active, starting gamescope..." >>"$LOG"
+
+  exec zsh -c /home/miika/.local/bin/gamescope-session \
+    2>&1 | tee -a "$LOG"
+
+  echo "gamescope exited, switching to tty7" >>"$LOG"
+  chvt 7
+
+  sleep 2
+done

@@ -1,0 +1,10 @@
+#!/bin/sh
+mpc pause &
+sleep 5 && gamescopectl adaptive_sync_ignore_overlay 1 &
+# WLR_LIBINPUT_NO_DEVICES=1
+DXVK_HDR=1 STEAM_GAMESCOPE_VRR_SUPPORTED=1 gamescope --mangoapp -r 120 --hdr-enabled -e --xwayland-count 1 -h 1440 -O HDMI-A-1 -f -- steam -steamdeck -steamos3 2>&1 | tee ~/gamescope.log
+sleep 1
+SINK=$(pamixer --list-sinks | grep Navi | awk '{gsub(/"/, "", $2); print $2}')
+pactl set-default-sink "$SINK"
+# cd /var/lib/lgtv
+# /usr/bin/bscpylgtvcommand 192.168.1.103 power_off
